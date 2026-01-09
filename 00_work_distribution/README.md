@@ -34,10 +34,19 @@ Compare os tempos de execução de CPU dos diferentes exemplos para observar com
 
 ```bash
 # Comparação entre estático e dinâmico com carga de trabalho uniforme
-time ./0_even_job_length/0_static
-time ./0_even_job_length/1_dynamic
+time ./0_even_job_length/0_static.out
+time ./0_even_job_length/1_dynamic.out
 
 # Comparação entre estático e dinâmico com carga de trabalho desigual
-time ./1_uneven_job_length/0_static
-time ./1_uneven_job_length/1_dynamic
+time ./1_uneven_job_length/0_static.out
+time ./1_uneven_job_length/1_dynamic.out
 ```
+
+Abaixo os resultados obtidos em um sistema com 16 núcleos
+
+| Carga de Trabalho | Particionador | Tempo de CPU (`user`) | Tempo de Sistema (`system`) | Tempo Total (`total`) |
+| :---------------- | :------------ | :-------------------- | :------------------------ | :-------------------- |
+| Balanceada    | Estático      | 0.41s                 | 1.24s                     | 1.369s                |
+| Balanceada    | Dinâmico      | 0.34s                 | 1.28s                     | 1.369s                |
+| Desbalanceada | Estático      | 0.47s                 | 0.91s                     | 2.314s                |
+| Desbalanceada | Dinâmico      | 0.38s                 | 1.22s                     | 1.751s                |
