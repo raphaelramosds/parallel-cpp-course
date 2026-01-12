@@ -1,4 +1,4 @@
-# Particionamento estático
+# Aula 01 - Particionamento estático
 
 ## Visão geral
 
@@ -25,3 +25,9 @@ Para exemplificar, considere o processamento de um array de 16 elementos com 4 t
 Existe uma consideração quando se trata de cache: o particionamento coarse-grained tende a ser mais amigável ao cache, pois os dados acessados por cada thread são contíguos na memória. Por outro lado, o particionamento fine-grained pode levar a mais falhas de cache devido ao acesso não contíguo aos dados.
 
 No entanto, o particionamento fine-grained pode ser mais eficaz em cenários onde a carga de trabalho é altamente variável, pois distribui as tarefas de maneira mais uniforme entre os threads.
+
+## A classe `std::jthread`
+
+O `std::jthread` é uma adição ao C++20 que simplifica o gerenciamento de threads. Ele é semelhante ao `std::thread`, mas com a vantagem de que ele automaticamente se junta (join) à thread quando o objeto `std::jthread` sai do escopo, evitando assim vazamentos de threads.
+
+Isso torna o código mais seguro e fácil de manter, pois reduz a necessidade de chamadas explícitas para `join()` ou `detach()`, minimizando o risco de erros relacionados ao gerenciamento de threads.
