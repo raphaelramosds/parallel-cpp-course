@@ -50,3 +50,8 @@ Abaixo os resultados obtidos em um sistema com 16 núcleos
 | 0_even_job_length/1_dynamic.cpp | 0.34s | 1.28s | 1.369s |
 | 1_uneven_job_length/0_static.cpp | 0.47s | 0.91s | 2.314s |
 | 1_uneven_job_length/1_dynamic.cpp | 0.38s | 1.22s | 1.751s |
+
+A seguir algumas considerações sobre os resultados acima
+
+- No cenário de carga de trabalho uniforme (`0_even_job_length`), tanto o particionamento estático quanto o dinâmico apresentam tempos totais semelhantes, visto que a carga é bem distribuída entre as threads
+- No cenário de carga de trabalho desigual (`1_uneven_job_length`), o particionamento dinâmico é significativamente mais eficiente, reduzindo o tempo total de execução em comparação ao particionamento estático.

@@ -81,4 +81,7 @@ Abaixo os resultados obtidos em um sistema com 16 núcleos
 | 0_static.cpp | 0.29s | 0.73s | 21% | 4.833s |
 | 1_dynamic.cpp | 0.32s | 0.69s | 28% | 3.592s |
 
-O particionamento **dinâmico é ~34% mais rápido** que o estático neste caso (3.592s vs 4.833s). O tempo de CPU também é melhor (28% vs 21%), indicando melhor utilização dos núcleos disponíveis. Isso confirma o esperado: com tarefas de tempos variáveis, a distribuição dinâmica evita que threads fiquem ociosas enquanto outras completam trabalhos longos.
+A seguir algumas considerações sobre os resultados acima
+
+- O particionamento dinâmico se mostra mais rápido que o estático neste caso quando consideramos o tempo Total
+- O tempo de CPU também é maior, indicando melhor utilização dos núcleos disponíveis
