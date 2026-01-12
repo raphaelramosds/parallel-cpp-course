@@ -28,7 +28,7 @@ Observe que a função `fetch_add` da classe `std::atomic` retorna o valor atual
 
 Essa operação deve ser atômica para evitar condições de corrida, garantindo que cada thread receba um índice único e correto.
 
-## Exemplo prático
+## Simulando tempos de trabalho variados
 
 Para simular um programa em que existem tarefas que levam tempos diferentes para serem concluídas, adotamos a seguinte estratégia
 
@@ -62,4 +62,23 @@ for (int i = 0; i < num_work_items; i += num_threads)
 }
 ```
 
-Essa estratégia está presentes nos programas `0_static.cpp` e `1_dynamic.cpp`, só que o primeiro utiliza particionamento estático e o segundo particionamento dinâmico. 
+## Tempos de execução
+
+A estratégia de distribuição acima foi implementada nos programas `0_static.cpp` e `1_dynamic.cpp`, em que o primeiro utiliza particionamento estático e o segundo particionamento dinâmico para processar as tarefas.
+
+Compare os tempos de execução de CPU dos diferentes exemplos para observar como o particionamento afeta o desempenho do processamento paralelo.
+
+```bash
+# Comparação entre estático e dinâmico com carga de trabalho desigual
+time ./0_static.out
+time ./1_dynamic.out
+```
+
+Abaixo os resultados obtidos em um sistema com 16 núcleos
+
+| Programa | User | System | CPU | Total |
+|:-----------|------|--------|-----|-------|
+| 0_static.cpp | 0.29s | 0.73s | 21% | 4.833s |
+| 1_dynamic.cpp | 0.32s | 0.69s | 28% | 3.592s |
+
+O particionamento **dinâmico é ~34% mais rápido** que o estático neste caso (3.592s vs 4.833s). O tempo de CPU também é melhor (28% vs 21%), indicando melhor utilização dos núcleos disponíveis. Isso confirma o esperado: com tarefas de tempos variáveis, a distribuição dinâmica evita que threads fiquem ociosas enquanto outras completam trabalhos longos.
