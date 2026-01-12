@@ -87,3 +87,46 @@ Utilizada para medir o desempenho de programas em sistemas Linux. Para instalá-
 ```bash
 sudo apt-get install linux-tools-common linux-tools-generic linux-tools-$(uname -r)
 ```
+
+Para contar quantas vezes eventos específicos ocorreram durante a execução
+
+```bash
+perf stat -d ./nome_do_programa.out
+```
+
+Algumas métricas importantes são
+
+- Instructions per cycle (IPC): Indica quão eficiente o código é (quantas instruções o processador executa por batida de clock).
+- L1-dcache-load-misses: Número de vezes que o processador tentou ler dados da cache L1, mas não os encontrou (cache miss).
+- LLC-load-misses: Número de vezes que o processador tentou ler dados da cache L3, mas não os encontrou (cache miss).
+
+Para analisar problemas de compartilhamento, o `perf c2c` pode ser utilizado da seguinte forma
+
+```bash
+# Monitora o programa em execucao
+perf c2c record ./nome_do_programa.out
+
+# Transforma os dados coletados em um relatório legível
+perf c2c report
+```
+
+A principal métrica do C2C é o Hit Modified (HITM), que indica quantas vezes um núcleo teve que esperar por dados modificados por outro núcleo devido a compartilhamento de cache.
+
+Ao abrir o relatório, você verá uma lista de endereços de memória (Cache Lines). Foque nas seguintes colunas
+
+- LLC Misses / HITM: Esta é a coluna mais importante. Ela mostra quantas vezes ocorreu o conflito de cache.
+- Total HITM: O número total de vezes que uma linha de cache teve que ser movida entre núcleos porque foi modificada.
+- Rmt HITM (Remote HITM): Indica que o conflito ocorreu entre núcleos de processadores físicos diferentes (NUMA nodes). Isso é extremamente custoso para a performance.
+- Lcl HITM (Local HITM): O conflito ocorreu entre núcleos do mesmo processador. É ruim, mas menos lento que o remoto.
+
+## Tempos de execução
+
+Compare os tempos de execução entre os programas `2_false_sharing.cpp` e `3_no_sharing.cpp` para observar o impacto do falso compartilhamento no desempenho.
+
+```bash
+# Comparação entre falso compartilhamento e sem compartilhamento
+time ./2_false_sharing.out
+time ./3_no_sharing.out
+```
+
+Abaixo os resultados obtidos em um sistema com 16 núcleos
