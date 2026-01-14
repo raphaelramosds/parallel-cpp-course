@@ -124,9 +124,6 @@ Ao abrir o relatório, você verá uma lista de endereços de memória (Cache Li
 Compare os tempos de execução entre os programas `2_false_sharing.cpp` e `3_no_sharing.cpp` para observar o impacto do falso compartilhamento no desempenho.
 
 ```bash
-# Comparação entre falso compartilhamento e sem compartilhamento
-time ./2_false_sharing.out
-time ./3_no_sharing.out
-```
 
-Abaixo os resultados obtidos em um sistema com 16 núcleos
+
+```

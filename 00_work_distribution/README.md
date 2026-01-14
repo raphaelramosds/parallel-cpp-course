@@ -27,29 +27,14 @@ Quanto ao método de distribuição, pode ser
 - **Dinâmica:** o trabalho é atribuído às threads em tempo de execução, conforme elas ficam disponíveis, como em `1_dynamic.cpp`.
 
 
-
 ## Tempos de execução
 
-Compare os tempos de execução de CPU dos diferentes exemplos para observar como a distribuição de trabalho afeta o desempenho do processamento paralelo.
+Compare os tempos de execução entre 0_static.cpp e 1_dynamic.cpp em ambos os cenários (carga balanceada e desbalanceada).
 
 ```bash
-# Comparação entre estático e dinâmico com carga de trabalho uniforme
-time ./0_even_job_length/0_static.out
-time ./0_even_job_length/1_dynamic.out
 
-# Comparação entre estático e dinâmico com carga de trabalho desigual
-time ./1_uneven_job_length/0_static.out
-time ./1_uneven_job_length/1_dynamic.out
+
 ```
-
-Abaixo os resultados obtidos em um sistema com 16 núcleos
-
-| Programa | Tempo de CPU (`user`) | Tempo de Sistema (`system`) | Tempo Total (`total`) |
-| :---------------- | :------------ | :-------------------- | :------------------------ |
-| 0_even_job_length/0_static.cpp | 0.41s | 1.24s | 1.369s |
-| 0_even_job_length/1_dynamic.cpp | 0.34s | 1.28s | 1.369s |
-| 1_uneven_job_length/0_static.cpp | 0.47s | 0.91s | 2.314s |
-| 1_uneven_job_length/1_dynamic.cpp | 0.38s | 1.22s | 1.751s |
 
 A seguir algumas considerações sobre os resultados acima
 

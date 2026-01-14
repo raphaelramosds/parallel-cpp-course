@@ -64,24 +64,4 @@ for (int i = 0; i < num_work_items; i += num_threads)
 
 ## Tempos de execução
 
-A estratégia de distribuição acima foi implementada nos programas `0_static.cpp` e `1_dynamic.cpp`, em que o primeiro utiliza particionamento estático e o segundo particionamento dinâmico para processar as tarefas.
-
-Compare os tempos de execução de CPU dos diferentes exemplos para observar como o particionamento afeta o desempenho do processamento paralelo.
-
-```bash
-# Comparação entre estático e dinâmico com carga de trabalho desigual
-time ./0_static.out
-time ./1_dynamic.out
-```
-
-Abaixo os resultados obtidos em um sistema com 16 núcleos
-
-| Programa | User | System | CPU | Total |
-|:-----------|------|--------|-----|-------|
-| 0_static.cpp | 0.29s | 0.73s | 21% | 4.833s |
-| 1_dynamic.cpp | 0.32s | 0.69s | 28% | 3.592s |
-
-A seguir algumas considerações sobre os resultados acima
-
-- O particionamento dinâmico se mostra mais rápido que o estático neste caso quando consideramos o tempo Total
-- O tempo de CPU também é maior, indicando melhor utilização dos núcleos disponíveis
+Compare os tempos de execução entre os programas `0_static.cpp` e `1_dynamic.cpp` para observar o impacto do particionamento dinâmico no desempenho.
