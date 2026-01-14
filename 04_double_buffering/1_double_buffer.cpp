@@ -57,7 +57,7 @@ int main()
         for (int i = 0; i < num_iterations; i++)
         {
             // Preencha TODO o buffer atual
-            // NOTE!! O generate_data executado ANTES do acquire garante que enquanto o buffer da iteracao 
+            // NOTE: O generate_data executado ANTES do acquire garante que enquanto o buffer da iteracao 
             // anterior esta sendo processado, ja estamos preenchendo novos dados no buffer atual
             generate_data(data_1);
 
@@ -66,8 +66,7 @@ int main()
 
             // Troca os buffers
             // NOTE: Com essa troca, observe que na proxima iteracao o buffer que acabamos de preencher sera 
-            // processado pela outra thread, enquanto o outro buffer sera preenchido novamente por esta thread
-            // apos a chamada de release() da thread de processamento
+            // processado pela outra thread, enquanto o outro buffer sera preenchido por esta thread na proxima iteracao
             data_1.swap(data_2);
 
             // Incrementa o semaforo de processamento para indicar que ha dados prontos
@@ -84,10 +83,10 @@ int main()
             // Tenta adquirir o semaforo de processamento da thread que gera os dados, esperando se necessario
             signal_to_process.acquire();
 
-            // Processa o buffer que a outra thread acabou de preencher 
+            // Processa o buffer que a outra thread preencheu
             process_data(data_2);
 
-            // Incrementa o semaforo de geracao para indicar que o buffer esta livre para ser preenchido novamente
+            // Incrementa o semaforo para que a outra thread possa liberar o proximo buffer
             signal_to_generate.release();
         }
     };
