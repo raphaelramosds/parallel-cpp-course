@@ -49,3 +49,9 @@ Boa parte dos códigos e recursos utilizados nesse repositório são adaptaçõe
 - Uso da cláusula `reduction` para agregação eficiente de valores
 - Cálculo paralelo de operações como soma, produto, máximo e mínimo
 - Colaboração entre threads para computar valores agregados
+
+[![CXX](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=C%2B%2B&logoColor=white)](./18_openmp_reduction/README.md) **Aula 19 - Diretiva `single` em OpenMP**
+- Definição de thread safety e condições de corrida
+- Conceito de barreiras para sincronização de threads
+- Uso da diretiva `single` para execução exclusiva por uma thread
+- Comparação de implementações sequenciais e paralelas do algoritmo de Gauss
