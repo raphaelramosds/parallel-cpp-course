@@ -55,3 +55,8 @@ Boa parte dos códigos e recursos utilizados nesse repositório são adaptaçõe
 - Conceito de barreiras para sincronização de threads
 - Uso da diretiva `single` para execução exclusiva por uma thread
 - Comparação de implementações sequenciais e paralelas do algoritmo de Gauss
+
+[![CXX](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=C%2B%2B&logoColor=white)](./18_openmp_reduction/README.md) **Aula 20 - Diretiva `nowait` em OpenMP**
+- Eliminação de barreiras implícitas para melhorar desempenho
+- Uso da diretiva `nowait` para permitir que threads prossigam sem esperar
+- Aplicação no algoritmo de Gauss para reduzir gargalos de sincronização

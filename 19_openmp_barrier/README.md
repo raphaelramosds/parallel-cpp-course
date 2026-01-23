@@ -4,6 +4,8 @@
 
 Thread safety é a propriedade de um código ou estrutura de dados que garante que ele funcione corretamente mesmo quando acessado por múltiplas threads simultaneamente.
 
+## Analisando um código não thread-safe
+
 Existem alguns blocos de código que não são thread-safe. Por exemplo, o algoritmo de redução de Gauss é executado com as seguintes etapas
 
 ```Pascal
@@ -26,6 +28,8 @@ Para cada linha i de 1 até n faça
     FimPara 
 FimPara
 ```
+
+Observe que a operação de eliminar o elemento abaixo do pivô vai afetar os demais elementos da linha, por isso percorremos todas as colunas da linha no loop de j até n.
 
 Suponha que queremos dividir o trabalho entre múltiplas threads, de modo que cada linha seja processada por um thread diferente, ou seja, criamos uma região paralela no laço mais externo.
 
@@ -59,6 +63,6 @@ Observe que há uma barreira implícita no final do bloco `single`, ou seja, tod
 
 A versão sequencial do algoritmo de Gauss é implementada no arquivo `0_baseline.cpp`. Suas versões paralelas estão implementadas nos arquivos `1_parallel_for.cpp` e `2_single.cpp`.
 
-No programa `1_parallel_for.cpp`, a região paralela é criada apenas no loop em que ocorre a eliminação dos elementos abaixo do pivô, ou seja, as threads trabalham numa mesma coluna da matriz, não havendo distribuição de linhas entre as threads. Dessa forma, não há condição de corrida.
+No programa `1_parallel_for.cpp`, a região paralela é criada apenas no loop em que ocorre a eliminação dos elementos abaixo do pivô, ou seja, as threads trabalham numa mesma coluna da matriz. Neste caso, não há distribuição de linhas entre as threads, portanto não há condição de corrida.
 
 Mas, no programa `2_single.cpp`, a região paralela envolve o loop mais externo, que distribui as linhas entre as threads. Nesse caso, a diretiva `single` é usada para garantir que apenas uma thread defina o pivô e divida a linha pelo pivô, evitando assim a condição de corrida. Além disso, note que a diretiva single também inclui a linha atual que está sendo eliminada.
